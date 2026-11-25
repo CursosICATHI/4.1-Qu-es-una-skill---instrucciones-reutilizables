@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Qué es una skill? Instrucciones reutilizables para las tareas del negocio</title>
+<style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Montserrat', sans-serif; background: #f0f2f5; color: #333; }
+    .slide { width: 100%; max-width: 1024px; margin: 20px auto; background: #fff; border-radius: 20px; box-shadow: 0 8px 30px rgba(0,0,0,0.12); overflow: hidden; min-height: 500px; display: flex; flex-direction: column; }
+    .slide-header { background: #3d5a96; padding: 18px 30px; display: flex; align-items: center; justify-content: space-between; }
+    .slide-header h2 { color: #fff; font-size: 20px; font-weight: 700; }
+    .slide-header .num { color: rgba(255,255,255,0.6); font-size: 14px; }
+    .slide-body { padding: 30px; flex: 1; }
+    .slide-footer { background: #2e4575; padding: 10px 30px; display: flex; justify-content: space-between; color: rgba(255,255,255,0.7); font-size: 12px; }
+    .portada { min-height: 90vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; }
+    .portada-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #3d5a96 0%, #e8755c 50%, #d05a7e 100%); z-index: 0; }
+    .portada .franja1 { position: absolute; bottom: 0; left: 0; right: 0; height: 12px; background: #e8755c; z-index: 1; }
+    .portada .franja2 { position: absolute; top: 0; right: 0; width: 25%; height: 8%; background: #d05a7e; z-index: 1; }
+    .portada .franja3 { position: absolute; bottom: 0; left: 0; width: 10%; height: 18%; background: #d05a7e; z-index: 1; }
+    .portada .franja4 { position: absolute; bottom: 0; right: 0; width: 15%; height: 12%; background: #e8755c; z-index: 1; }
+    .portada-content { position: relative; z-index: 2; padding: 40px; }
+    .portada .campus { color: rgba(255,255,255,0.7); font-size: 13px; letter-spacing: 4px; font-weight: 700; margin-bottom: 40px; }
+    .portada h1 { color: #fff; font-size: 48px; font-weight: 900; line-height: 1.2; margin-bottom: 8px; text-shadow: 3px 3px 12px rgba(0,0,0,0.2); }
+    .portada h1 span { display: block; font-size: 32px; font-weight: 600; }
+    .portada .tema-label { color: rgba(255,255,255,0.85); font-size: 18px; margin-top: 50px; }
+    .portada .tema { color: #fff; font-size: 28px; font-weight: 700; margin-top: 8px; }
+    .portada .instituto { color: rgba(255,255,255,0.75); font-size: 15px; margin-top: 50px; }
+    .portada .fecha { color: rgba(255,255,255,0.55); font-size: 13px; margin-top: 10px; }
+    h3 { color: #3d5a96; font-size: 22px; margin-bottom: 20px; }
+    h4 { color: #3d5a96; font-size: 18px; margin-bottom: 12px; }
+    .block { background: #fdf4f0; border-left: 5px solid #e8755c; padding: 18px 20px; border-radius: 0 10px 10px 0; margin: 15px 0; }
+    .block-title { font-weight: 700; color: #e8755c; margin-bottom: 6px; }
+    .block-blue { background: #eff2f8; border-left: 5px solid #3d5a96; }
+    .block-blue .block-title { color: #3d5a96; }
+    .block-pink { background: #fdf0f4; border-left: 5px solid #d05a7e; }
+    .block-pink .block-title { color: #d05a7e; }
+    .block-vino { background: #fdf0f2; border-left: 5px solid #691b31; }
+    .block-vino .block-title { color: #691b31; }
+    ul, ol { padding-left: 22px; line-height: 2; }
+    li { margin-bottom: 4px; }
+    .columns { display: flex; gap: 30px; }
+    .columns > div { flex: 1; }
+    table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+    th, td { border: 1px solid #ddd; padding: 10px 14px; text-align: left; }
+    th { background: #3d5a96; color: #fff; }
+    tr:nth-child(even) { background: #f8f9fc; }
+    .tag { display: inline-block; background: #3d5a96; color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-right: 6px; }
+    .center { text-align: center; }
+    .final { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 400px; text-align: center; }
+    .final h2 { color: #3d5a96; font-size: 32px; margin-bottom: 20px; }
+    .final p { color: #666; font-size: 18px; }
+    .nav-bar { max-width: 1024px; margin: 10px auto; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+    .nav-bar button { background: #3d5a96; color: #fff; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; transition: all 0.2s; }
+    .nav-bar button:hover { background: #e8755c; transform: translateY(-2px); }
+    .nav-bar button.activo { background: #d05a7e; }
+    .nav-controls { max-width: 1024px; margin: 10px auto; display: flex; gap: 10px; justify-content: center; }
+    .nav-controls button { background: #3d5a96; color: #fff; border: none; padding: 10px 28px; border-radius: 25px; cursor: pointer; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 15px; transition: all 0.2s; }
+    .nav-controls button:hover { background: #e8755c; transform: scale(1.05); }
+    .counter { max-width: 1024px; margin: 5px auto; text-align: center; font-size: 13px; color: #888; }
+    @media (max-width: 768px) {
+        .portada h1 { font-size: 32px; }
+        .portada h1 span { font-size: 24px; }
+        .portada .tema { font-size: 20px; }
+        .columns { flex-direction: column; }
+        .slide-body { padding: 20px; }
+        .slide-header h2 { font-size: 16px; }
+    }
+
+</style>
+</head>
+<body>
+
+<div class="nav-controls">
+    <button onclick="ant()">&#9664; Anterior</button>
+    <button onclick="sig()">Siguiente &#9654;</button>
+</div>
+<div class="counter" id="counter"></div>
+
+<div id="slides-container"></div>
+
+<script>
+const PORTADA = {
+    "etiqueta": "Tema 4.1 — Unidad 4",
+    "tema": "¿Qué es una skill?<br>Instrucciones reutilizables",
+    "instituto": "Instituto de Capacitación para el Trabajo del Estado de Hidalgo"
+};
+const slides = [
+    {
+        "tipo": "portada"
+    },
+    {
+        "titulo": "Índice",
+        "num": "2 / 32",
+        "body": "<div class=\"columns\"><div><strong style=\"color:#3d5a96;\">1. Entender</strong><br>- Qué es una skill<br>- Anatomía<br>- Divulgación progresiva<br><br><strong style=\"color:#3d5a96;\">2. Comparar</strong><br>- Prompt vs skill<br>- Skill vs agente<br>- Skill vs plugin</div><div><strong style=\"color:#3d5a96;\">3. Usar</strong><br>- Dónde vive<br>- Cómo se activa<br>- Ejemplo<br><br><strong style=\"color:#3d5a96;\">4. Cerrar</strong><br>- Seguridad<br>- Actividad<br>- Resumen</div></div>"
+    },
+    {
+        "titulo": "Objetivo de aprendizaje",
+        "num": "3 / 32",
+        "body": "<p style=\"font-size:17px;line-height:1.7;margin-bottom:12px;\">Al terminar podrás <strong>explicar qué es una skill, reconocer su estructura y saber cuándo usarla</strong>.</p><div class=\"block\"><div class=\"block-title\">Lo que sabrás hacer</div><ul style=\"font-size:16px;line-height:2.1;\"><li>Definir skill y diferenciarla de un prompt.</li><li>Identificar las partes de un SKILL.md.</li><li>Explicar la divulgación progresiva.</li><li>Decidir qué tareas merecen una skill.</li></ul></div>"
+    },
+    {
+        "titulo": "¿Qué es una skill?",
+        "num": "4 / 32",
+        "body": "<p style=\"font-size:17px;line-height:1.7;margin-bottom:12px;\">Una skill es una <strong>carpeta con instrucciones, recursos y scripts</strong> que enseña al agente a resolver una tarea de una forma específica.</p><ul style=\"font-size:16px;line-height:2.1;\"><li>Se activa cuando la tarea coincide con su descripción.</li><li>Se reutiliza en distintas conversaciones.</li><li>Estandariza la forma de trabajar.</li><li>Es el equivalente a un manual de procedimiento.</li></ul>"
+    },
+    {
+        "titulo": "Anatomía",
+        "num": "5 / 32",
+        "body": "<p style=\"font-size:17px;line-height:1.7;margin-bottom:12px;\">En su forma mínima, una skill es una carpeta con un archivo <strong>SKILL.md</strong>.</p><table style=\"font-size:14px;\"><tr><th>Parte</th><th>Contenido</th></tr><tr><td>Nombre</td><td>Identificador de la skill</td></tr><tr><td>Descripción</td><td>Cuándo debe usarse</td></tr><tr><td>Instrucciones</td><td>Pasos en Markdown</td></tr><tr><td>Recursos</td><td>Plantillas, ejemplos, datos</td></tr><tr><td>Scripts</td><td>Código opcional para tareas repetitivas</td></tr></table>"
+    },
+    {
+        "titulo": "El frontmatter",
+        "num": "6 / 32",
+        "body": "<p style=\"font-size:17px;line-height:1.7;margin-bottom:12px;\">El SKILL.md empieza con un encabezado YAML entre tres guiones.</p><div class=\"block block-vino\"><div class=\"block-title\">Ejemplo</div>---<br>name: cotizacion-floreria<br>description: Prepara cotizaciones de arreglos florales con la plantilla del negocio y calcula IVA.<br>---</div><p style=\"font-size:15px;line-height:1.7;margin-bottom:12px;\">El nombre y la descripción son lo primero que el agente lee.</p>"
+    },
+    {
+        "titulo": "Divulgación progresiva",
+        "num": "7 / 32",
+        "body": "<p style=\"font-size:17px;line-height:1.7;margin-bottom:12px;\">La skill se carga en <strong>tres niveles</strong> para no llenar el contexto.</p><ol style=\"font-size:16px;line-height:2.1;\"><li>El agente conoce el nombre y la descripción.</li><li>Si la tarea coincide, lee el SKILL.md completo.</li><li>Solo abre los recursos adicionales cuando los necesita.</li></ol><div class=\"block block-blue\"><div class=\"block-title\">Ventaja</div>Puedes tener muchas skills sin consumir contexto de más.</div>"
+    },
+    {
+        "titulo": "Skill vs prompt",
+        "num": "8 / 32",
+        "body": "<table style=\"font-size:14px;\"><tr><th>Aspecto</th><th>Prompt</th><th>Skill</th></tr><tr><td>Duración</td><td>Una conversación</td><td>Reutilizable siempre</td></tr><tr><td>Formato</td><td>Texto libre</td><td>Carpeta estructurada</td></tr><tr><td>Compartir</td><td>Copiar y pegar</td><td>Instalar o versionar</td></tr><tr><td>Consistencia</td><td>Depende de ti</td><td>La misma cada vez</td></tr></table>"
+    },
+    {
+        "titulo": "Skill vs agente",
+        "num": "9 / 32",
+        "body": "<p style=\"font-size:17px;line-height:1.7;margin-bottom:12px;\">Un agente es quien ejecuta; una skill es el <strong>conocimiento</strong> que usa.</p><ul style=\"font-size:16px;line-height:2.1;\"><li>El agente decide y actúa.</li><li>La skill le dice cómo hacer algo.</li><li>Un agente puede usar varias skills.</li><li>Una skill puede usarse en varios agentes.</li></ul>"
+    },
+    {
+        "titulo": "Skill vs plugin",
+        "num": "10 / 32",
+        "body": "<p style=\"font-size:17px;line-height:1.7;margin-bottom:12px;\">Un plugin es un paquete mayor que puede incluir skills, conectores y subagentes.</p><ul style=\"font-size:16px;line-height:2.1;\"><li>Skill: una capacidad.</li><li>Plugin: un conjunto de capacidades.</li><li>El plugin se instala; la skill se activa.</li><li>Ambos deben venir de fuentes confiables.</li></ul>"
+    },
+    {
+        "titulo": "Dónde vive",
+        "num": "11 / 32",
+        "body": "<ul style=\"font-size:16px;line-height:2.1;\"><li>En una carpeta del proyecto: .claude/skills o skills/.</li><li>En una carpeta personal del usuario.</li><li>En un repositorio compartido.</li><li>Empaquetada en un plugin.</li><li>En la nube, según la plataforma.</li></ul>"
+    },
+    {
+        "titulo": "Dónde funciona",
+        "num": "12 / 32",
+        "body": "<p style=\"font-size:17px;line-height:1.7;margin-bottom:12px;\">El formato SKILL.md es un estándar abierto (agentskills.io) que funciona en varias herramientas.</p><ul style=\"font-size:16px;line-height:2.1;\"><li>Claude y Claude Code.</li><li>Codex y otros agentes.</li><li>Claude API con ejecución de código.</li><li>La misma skill puede viajar entre ellas.</li></ul>"
+    },
+    {
+        "titulo": "Cómo se activa",
+        "num": "13 / 32",
+        "body": "<p style=\"font-size:17px;line-height:1.7;margin-bottom:12px;\">El agente decide usarla cuando la petición coincide con la descripción.</p><ul style=\"font-size:16px;line-height:2.1;\"><li>Puedes invocarla explícitamente ($nombre).</li><li>Puedes dejar que la elija sola.</li><li>La descripción debe ser clara y específica.</li><li>Si no se activa, revisa la descripción.</li></ul>"
+    },
+    {
+        "titulo": "Ejemplo: cotización",
+        "num": "14 / 32",
+        "body": "<div class=\"block block-vino\"><div class=\"block-title\">Skill de cotización</div><ul style=\"font-size:16px;line-height:2.1;\"><li>Nombre: cotizacion-floreria.</li><li>Descripción: prepara cotizaciones con la plantilla del negocio.</li><li>Pasos: leer precios, calcular subtotal, IVA y total.</li><li>Plantilla: cotizacion.docx.</li><li>Ejemplo: dos arreglos con IVA.</li></ul></div>"
+    },
+    {
+        "titulo": "Beneficios",
+        "num": "15 / 32",
+        "body": "<ul style=\"font-size:16px;line-height:2.1;\"><li>Consistencia en el resultado.</li><li>Ahorro de tiempo al no repetir instrucciones.</li><li>Conocimiento del negocio documentado.</li><li>Facilidad para capacitar a alguien nuevo.</li><li>Se comparte con el equipo.</li></ul>"
+    },
+    {
+        "titulo": "Límites",
+        "num": "16 / 32",
+        "body": "<ul style=\"font-size:16px;line-height:2.1;\"><li>No reemplaza el criterio humano.</li><li>Necesita mantenimiento.</li><li>Puede fallar si la descripción es ambigua.</li><li>No corrige datos incorrectos.</li><li>Requiere probarla con casos reales.</li></ul>"
+    },
+    {
+        "titulo": "Seguridad",
+        "num": "17 / 32",
+        "body": "<div class=\"block block-vino\"><div class=\"block-title\">Regla</div>Una skill puede incluir scripts. Trátala como una dependencia: revisa qué hace antes de instalarla.</div><ul style=\"font-size:16px;line-height:2.1;\"><li>Instala solo skills propias o de fuentes confiables.</li><li>Revisa los permisos que solicita.</li><li>No incluyas contraseñas en la skill.</li><li>Versiona y documenta los cambios.</li></ul>"
+    },
+    {
+        "titulo": "Cómo empezar",
+        "num": "18 / 32",
+        "body": "<ol style=\"font-size:16px;line-height:2.1;\"><li>Elige una tarea que repites.</li><li>Escribe los pasos tal como los haces.</li><li>Crea la carpeta y el SKILL.md.</li><li>Pruébala con tres casos.</li><li>Ajusta la descripción e instrucciones.</li></ol>"
+    },
+    {
+        "titulo": "Crear con el agente",
+        "num": "19 / 32",
+        "body": "<p style=\"font-size:17px;line-height:1.7;margin-bottom:12px;\">Puedes pedirle al propio agente que te ayude a escribir la skill.</p><div class=\"block block-blue\"><div class=\"block-title\">Encargo</div>«Ayúdame a crear una skill para cotizaciones. Pregúntame lo que necesites y genera el SKILL.md con nombre, descripción, pasos y un ejemplo».</div><p style=\"font-size:15px;line-height:1.7;margin-bottom:12px;\">Revisa el resultado: el agente puede omitir reglas que tú das por obvias.</p>"
+    },
+    {
+        "titulo": "Probar",
+        "num": "20 / 32",
+        "body": "<ol style=\"font-size:16px;line-height:2.1;\"><li>Caso típico.</li><li>Caso con datos incompletos.</li><li>Caso extremo.</li><li>Revisar el resultado contra la regla.</li><li>Ajustar instrucciones.</li></ol>"
+    },
+    {
+        "titulo": "Errores comunes",
+        "num": "21 / 32",
+        "body": "<table style=\"font-size:14px;\"><tr><th>Error</th><th>Consecuencia</th><th>Solución</th></tr><tr><td>Descripción vaga</td><td>No se activa</td><td>Describir cuándo usarla</td></tr><tr><td>Instrucciones demasiado largas</td><td>Se pierde el foco</td><td>Dividir en pasos</td></tr><tr><td>Sin ejemplos</td><td>Resultados distintos</td><td>Agregar un caso</td></tr><tr><td>Sin pruebas</td><td>Falla en producción</td><td>Probar tres casos</td></tr><tr><td>Datos sensibles</td><td>Riesgo</td><td>Usar ejemplos ficticios</td></tr></table>"
+    },
+    {
+        "titulo": "Buenas prácticas",
+        "num": "22 / 32",
+        "body": "<ul style=\"font-size:16px;line-height:2.1;\"><li>Una skill, una tarea.</li><li>Descripción en una frase clara.</li><li>Pasos numerados y observables.</li><li>Un ejemplo de entrada y salida.</li><li>Menos de 500 líneas en el SKILL.md.</li><li>Recursos aparte, no todo en el archivo.</li></ul>"
+    },
+    {
+        "titulo": "Casos de uso",
+        "num": "23 / 32",
+        "body": "<table style=\"font-size:14px;\"><tr><th>Área</th><th>Skill posible</th></tr><tr><td>Ventas</td><td>Cotizaciones y seguimiento</td></tr><tr><td>Atención</td><td>Respuestas frecuentes</td></tr><tr><td>Marketing</td><td>Publicaciones para redes</td></tr><tr><td>Finanzas</td><td>Reporte mensual</td></tr><tr><td>Operación</td><td>Lista de pendientes</td></tr></table>"
+    },
+    {
+        "titulo": "Actividad",
+        "num": "24 / 32",
+        "body": "<p style=\"font-size:17px;line-height:1.7;margin-bottom:12px;\"><strong>Meta:</strong> identificar tres tareas de tu negocio que merecen una skill.</p><ol style=\"font-size:16px;line-height:2.1;\"><li>Anota cinco tareas repetitivas.</li><li>Elige tres que tengan pasos claros.</li><li>Escribe nombre y descripción de cada una.</li><li>Define un ejemplo de entrada y salida.</li><li>Explica por qué se beneficiaría de una skill.</li></ol><div class=\"block block-blue\"><div class=\"block-title\">Entregable</div>Ficha de tres ideas de skill.</div>"
+    },
+    {
+        "titulo": "Rúbrica",
+        "num": "25 / 32",
+        "body": "<table style=\"font-size:14px;\"><tr><th>Criterio</th><th>Peso</th><th>Qué se observa</th></tr><tr><td>Selección</td><td>30%</td><td>Tareas repetitivas y claras</td></tr><tr><td>Descripción</td><td>30%</td><td>Clara y específica</td></tr><tr><td>Ejemplo</td><td>20%</td><td>Entrada y salida</td></tr><tr><td>Justificación</td><td>20%</td><td>Beneficio real</td></tr></table>"
+    },
+    {
+        "titulo": "Resumen",
+        "num": "26 / 32",
+        "body": "<ul style=\"font-size:17px;line-height:2.1;\"><li>Una skill enseña al agente a hacer una tarea.</li><li>Se compone de SKILL.md, recursos y scripts.</li><li>Se activa por su descripción.</li><li>Se reutiliza y comparte.</li><li>Solo instala skills confiables.</li></ul><div class=\"block center\" style=\"margin-top:15px;\"><div class=\"block-title\">Frase final</div><em>Enseña una vez, repite siempre.</em></div>"
+    },
+    {
+        "titulo": "Autoevaluación",
+        "num": "27 / 32",
+        "body": "<ol style=\"font-size:17px;line-height:2.1;\"><li>¿Qué es una skill?</li><li>¿Cuáles son sus tres niveles de carga?</li><li>¿Qué diferencia hay entre skill y plugin?</li><li>¿Cómo se activa?</li><li>¿Qué revisar antes de instalarla?</li></ol>"
+    },
+    {
+        "titulo": "Glosario",
+        "num": "28 / 32",
+        "body": "<table style=\"font-size:14px;\"><tr><th>Término</th><th>Significado</th></tr><tr><td>Skill</td><td>Carpeta con instrucciones para una tarea.</td></tr><tr><td>SKILL.md</td><td>Archivo principal de la skill.</td></tr><tr><td>Frontmatter</td><td>Encabezado con nombre y descripción.</td></tr><tr><td>Divulgación progresiva</td><td>Cargar solo lo necesario.</td></tr><tr><td>Plugin</td><td>Paquete de skills y conectores.</td></tr></table>"
+    },
+    {
+        "titulo": "Recursos",
+        "num": "29 / 32",
+        "body": "<div class=\"block block-blue\"><div class=\"block-title\">Fuentes oficiales</div><ul style=\"font-size:16px;line-height:2.1;\"><li>agentskills.io (estándar abierto)</li><li>Anthropic: Equipping agents with Agent Skills</li><li>Repositorio anthropics/skills</li><li>OpenAI: repositorio de skills</li></ul></div>"
+    },
+    {
+        "titulo": "Consejos",
+        "num": "30 / 32",
+        "body": "<ul style=\"font-size:16px;line-height:2.1;\"><li>Empieza por la tarea más repetida.</li><li>Prueba con datos reales de un mes cerrado.</li><li>Ajusta la descripción antes que las instrucciones.</li><li>Documenta la versión.</li><li>Comparte solo lo que ya funciona.</li></ul>"
+    },
+    {
+        "titulo": "Cierre",
+        "num": "31 / 32",
+        "body": "<div class=\"block block-vino\"><div class=\"block-title\">Idea para llevarte</div>Una skill convierte tu experiencia en un activo reutilizable del negocio.</div><p style=\"font-size:16px;line-height:1.7;margin-bottom:12px;\">En 4.2 crearás tu primera skill paso a paso.</p>"
+    },
+    {
+        "titulo": "Gracias por su atención",
+        "num": "32 / 32",
+        "body": "<div class=\"final\">\n            <h2>¿Dudas o comentarios?</h2>\n            <p>Participa en el foro del tema</p>\n            <p style=\"margin-top:30px;color:#3d5a96;font-weight:700;\">ICATHI 4.0 — Inteligencia Artificial para tu Negocio</p>\n        </div>"
+    }
+];
+
+let actual = 0;
+
+function renderSlide(i) {
+    const s = slides[i];
+    const c = document.getElementById('slides-container');
+    if (s.tipo === 'portada') {
+        c.innerHTML = '<div class="slide portada">' +
+            '<div class="portada-bg"></div>' +
+            '<div class="franja1"></div><div class="franja2"></div><div class="franja3"></div><div class="franja4"></div>' +
+            '<div class="portada-content">' +
+            '<div class="campus">CAMPUS VIRTUAL</div>' +
+            '<h1>Inteligencia Artificial<span>para tu Negocio</span></h1>' +
+            '<div class="tema-label">' + PORTADA.etiqueta + '</div>' +
+            '<div class="tema">' + PORTADA.tema + '</div>' +
+            '<div class="instituto">' + PORTADA.instituto + '</div>' +
+            '<div class="fecha">2026</div>' +
+            '</div></div>';
+    } else {
+        c.innerHTML = '<div class="slide">' +
+            '<div class="slide-header"><h2>' + s.titulo + '</h2><span class="num">' + s.num + '</span></div>' +
+            '<div class="slide-body">' + s.body + '</div>' +
+            '<div class="slide-footer"><span>ICATHI 4.0</span><span>' + s.num + '</span></div>' +
+            '</div>';
+    }
+    document.getElementById('counter').textContent = 'Diapositiva ' + (i + 1) + ' de ' + slides.length;
+    document.querySelectorAll('.nav-bar button').forEach((b, idx) => {
+        b.classList.toggle('activo', idx === i);
+    });
+}
+
+function sig() {
+    if (actual < slides.length - 1) { actual++; renderSlide(actual); }
+}
+function ant() {
+    if (actual > 0) { actual--; renderSlide(actual); }
+}
+
+// Nav bar
+document.addEventListener('DOMContentLoaded', () => {
+    const nav = document.createElement('div');
+    nav.className = 'nav-bar';
+    slides.forEach((_, i) => {
+        const b = document.createElement('button');
+        b.textContent = i + 1;
+        b.onclick = () => { actual = i; renderSlide(i); };
+        nav.appendChild(b);
+    });
+    document.body.insertBefore(nav, document.querySelector('.nav-controls'));
+    renderSlide(0);
+});
+</script>
+
+</body>
+</html>
